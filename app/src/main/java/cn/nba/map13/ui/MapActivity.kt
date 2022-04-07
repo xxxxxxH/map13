@@ -5,6 +5,7 @@ import androidx.lifecycle.lifecycleScope
 import cn.nba.map13.R
 import cn.nba.map13.base.BasePage
 import cn.nba.map13.utils.*
+import com.mapbox.geojson.Point
 import com.mapbox.maps.Style
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
@@ -16,6 +17,11 @@ class MapActivity : BasePage(R.layout.activity_main) {
 
     override fun initView() {
         requestPermission({
+            mapView.setCurrentLocation()
+            mapView.setCameraClick{lng,lat->
+                mapView.moveMap(Point.fromLngLat(lng,lat))
+            }
+            mapView.loadStyle(Style.OUTDOORS)
             actionBtn.click {
                 buildOptionDialog({
                     //near
@@ -53,5 +59,20 @@ class MapActivity : BasePage(R.layout.activity_main) {
                 }
             }
         })
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mapView.onStart()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mapView.onStop()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mapView.onDestroy()
     }
 }
