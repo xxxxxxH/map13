@@ -8,14 +8,14 @@ android {
     compileSdkVersion 30
 
     defaultConfig {
-        applicationId "cn.nba.map13"
+        applicationId "cn.nba.map.live.gps.navigation"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.1"
 
         ndk {
-            abiFilters 'armeabi-v7a'
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
         }
     }
 
